@@ -1,0 +1,391 @@
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@100;200;300;400;600;800&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Work Sans", sans-serif;
+}
+
+.hero {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    background: url(../images/BGIMAGE.png) no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+header {
+    position: relative;
+    top: 0;
+    height: 15vh;
+    width: 100%;
+    padding: 30px 7vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #D9D9D9;
+}
+
+header .logo{
+    position: relative;
+    width: 20vh;  /*Modifier taille logo*/
+}
+.navigation .navactif{
+    color: #FF7004;
+}
+
+header .navigation a{
+    text-decoration: none;
+    font-weight: 500;
+    letter-spacing: 1px;
+    padding: 2px 15px;
+    border-radius: 20px;
+    color: black;
+}
+
+header .navigation a:not(:last-child){
+    margin-right: 30px;
+}
+
+header .navigation a:hover{
+    color: #FF7004;
+}
+
+.content {
+    max-width: 800px;
+    padding: 30px 7vw;
+}
+
+.content .info h2{
+    color: white;
+    font-size: 55px;
+    text-transform: capitalize;
+    font-weight: 800;
+    letter-spacing: 1px;
+    line-height: 60px;
+    margin-bottom: 30px;
+}
+
+.content .info p{
+    color: white;
+    font-size: 20px;
+    font-weight: 500;
+    margin-bottom: 40px;  
+}
+
+.content .CoBouton {
+    color: white;
+    background: #FF7004;
+    text-decoration: none;
+    letter-spacing: 1px;
+    padding: 15px 25px;
+    border-radius: 50px;
+    transition: 0.3s;
+}
+
+.content .CoBouton:hover{
+    color: #FF7004;
+    background: white;
+    transform: scale(1.20);
+}
+
+label {
+    display: none;
+}
+
+#check {
+    z-index: 3;
+    display: none;
+}
+
+/*Responsive Design*/
+@media (max-width: 940px){
+    header .navigation{
+        display: none;
+    }
+    label {
+        display: block;
+        font-size: 30px;
+        cursor: pointer;
+        transition: 0.3s;
+        transition-property: color;
+    }
+    label:hover{
+        color: #FF7004;
+    }
+    label .close-btn{
+        display: none;
+    }
+    #check:checked ~ header .navigation{
+        z-index: 2;
+        position: fixed;
+        background: rgba(217, 217, 217, 1);
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    #check:checked ~ header .navigation a{
+        margin-right: 0;
+        margin-bottom: 50px;
+        letter-spacing: 2px;
+    }
+    #check:checked ~ header label .menu-btn{
+        display: none;
+    }
+    #check:checked ~ header label .close-btn{
+        z-index: 2;
+        display: block;
+        position: fixed;
+    }
+    .content .info h2{
+        font-size: 35px;
+        line-height: 45px;
+    }
+    .content .info p{
+        font-size: 15px;
+    }
+}
+
+/*Section démo avec la photo faite par l'IA lol*/
+
+
+.content-demo {
+    display: grid;
+    grid-template-columns: minmax(auto, 500px) 1fr; /* Première colonne avec une largeur maximale de 500px */
+    grid-column-gap: 10vw; /* Espacement entre les colonnes */
+    max-width: 100%; /* Largeur maximale pour le contenu */
+    margin: 0 auto; /* Centrage horizontal */
+    background: #D9D9D9; /* Couleur de fond pour la grille */
+    padding: 30px 7vw;
+}
+
+.imagedemo {
+    max-width: 100%;
+    height: auto;
+    width: 700px;
+
+}
+
+.text {
+    max-width: auto;
+    display: flex;
+    font-weight: 500;
+    flex-direction: column;
+    justify-content: center; /* Centrage vertical du texte */
+}
+
+.text h2{
+    font-size: 55px;
+    text-transform: capitalize;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+.text p{
+    padding-top: 20px;
+    font-size: 20px;
+    font-weight: 500;
+    margin-bottom: 40px;  
+}
+
+/*Mise en place du responsive design*/
+@media (max-width: 940px) {
+    .content-demo {
+        grid-template-columns: 1fr; /* Une seule colonne pour la version mobile */
+
+    }
+
+    .imagedemo {
+        width: 100%; /* Pour qu'elle s'adapte à la largeur */
+        max-width: 500px; /* Annule la largeur maximale */
+        margin-bottom: 20px; /* Espacement entre l'image et le texte */
+    }
+
+    .text {
+        max-width: 100%; /* Prend la largeur disponible */
+        text-align: center left; /* Centre le texte */
+        padding-left: 2vw;
+    }
+
+    .text h2 {
+        font-size: 35px; /* Taille de la police ajustée */
+        line-height: 1.3; /* Espacement entre les lignes */
+    }
+
+    .text p {
+        padding-top: 20px;
+        font-size: 16px; /* Taille de la police ajustée */
+    }
+}
+
+
+/*Page FORUM*/
+
+.FAQwrapper {
+    max-width: 75%;
+    margin: 7vw;
+    z-index: 1;
+    background: #D9D9D9;
+    max-width: 100%;
+    border-radius: 20px;
+    padding: 30px 7vw 60px 7vw;
+}
+
+.FAQwrapper > h1{
+    margin: 1.5rem 0;
+    text-align: center;
+    letter-spacing: 2px;
+    font-size: 45px;
+    font-weight: 600;
+}
+
+.question {
+    background-color: #D9D9D9;
+    cursor: pointer;
+    font-size: 1.2rem;
+    width: 100%;
+    padding: 2rem 2.5rem;
+    border: none;
+    outline: none;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.question i {
+    font-size: 1.6rem;
+}
+
+.active, .question:hover{
+    background-color: white;
+    color: #FF7004;
+}
+
+.reponse{
+    padding: 0 2rem 2.5rem 2rem;
+    background-color: white;
+    overflow: hidden;
+    display: none;
+}
+
+.reponse p{
+    color: rgba(0,0,0,0.7);
+    font-size: 1.2rem;
+    line-height: 1.4;
+}
+
+.faq{
+    border: 1px solid rgba(0,0,0,0.2);
+    margin: 10px 0;
+}
+
+.faq .active {
+    border: none;
+}
+
+
+/* Page des conférences */
+
+footer{
+        position: relative;
+    top: 0;
+    height: 30vh;
+    width: 100%;
+    padding: 30px 7vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #D9D9D9;
+}
+
+footer .logo{
+    position: relative;
+    width: 24vh;  /*Modifier taille logo*/
+}
+
+footer #Copyright{
+   position: absolute;
+   right: 162vh;
+   top: 21vh;
+}
+
+footer .titresection{
+ font-size: 22px;
+}
+
+div .link{
+    color: black;
+    font-size: 22px ;
+}
+
+.titre {
+    text-align: center;
+    color: black;
+}
+
+.logosujet {
+    height: 200px; /* Définissez la hauteur souhaitée pour les logos */
+    width: 250px; /* Ajuste automatiquement la largeur en fonction du ratio d'aspect original */
+    padding: 25px; /* Ajout du padding */
+}
+
+#Maths{
+    position: absolute;
+    top: 28vh;
+    left: 35vh;
+}
+
+#Physique{
+    position: absolute;
+    top: 28vh;
+    left: 85vh;
+}
+
+#Info{
+    position: absolute;
+    top: 28vh;
+    left: 135vh ;
+}
+
+#Philo{
+    position: absolute;
+    top: 61vh;
+    left: 35vh;
+}
+
+#Eco{
+    position: absolute;
+    top: 61vh;
+    left: 85vh;
+}
+
+#Divers{
+    position: absolute;
+    top: 61vh;
+    left: 135vh;
+}
+
+.sujet {
+    background: #D9D9D9;
+    border-style: solid;
+    border-width: 0.5vh;
+    border-radius: 20px;
+    border-color: #D9D9D9;
+    transition: border-left-width 0.3s ease; /* Ajout de la transition */
+}
+
+.sujet:hover {
+    border-left-width: 1vh;
+}
