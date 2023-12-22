@@ -18,7 +18,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $connexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
         // Requête pour vérifier si l'utilisateur existe bien
-        $requete = $connexion->prepare("SELECT * FROM `utilisateur` WHERE `adresse mail` = :email AND `mot de passe` = :password");
+        $requete = $connexion->prepare("SELECT * FROM ` utilisateur` WHERE `adresse mail` = :email AND `mot de passe` = :password");
         $requete->bindParam(':email', $email);
         $requete->bindParam(':password', $password);
         $requete->execute();
