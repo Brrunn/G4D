@@ -369,7 +369,99 @@ label {
     text-align: center;
 }
 
+/* Page des conférences */
 
+footer{
+    position: relative;
+top: 0;
+height: 30vh;
+width: 100%;
+padding: 30px 7vw;
+display: flex;
+justify-content: space-between;
+align-items: center;
+background: #D9D9D9;
+}
+
+footer .logo{
+position: relative;
+width: 24vh;  /*Modifier taille logo*/
+}
+
+footer #Copyright{
+position: absolute;
+right: 162vh;
+top: 21vh;
+}
+
+footer .titresection{
+font-size: 22px;
+}
+
+div .link{
+color: black;
+font-size: 22px ;
+}
+
+.titre {
+text-align: center;
+color: black;
+}
+
+.logosujet {
+height: 200px; /* Définissez la hauteur souhaitée pour les logos */
+width: 250px; /* Ajuste automatiquement la largeur en fonction du ratio d'aspect original */
+padding: 25px; /* Ajout du padding */
+}
+
+#Maths{
+position: absolute;
+top: 28vh;
+left: 35vh;
+}
+
+#Physique{
+position: absolute;
+top: 28vh;
+left: 85vh;
+}
+
+#Info{
+position: absolute;
+top: 28vh;
+left: 135vh ;
+}
+
+#Philo{
+position: absolute;
+top: 61vh;
+left: 35vh;
+}
+
+#Eco{
+position: absolute;
+top: 61vh;
+left: 85vh;
+}
+
+#Divers{
+position: absolute;
+top: 61vh;
+left: 135vh;
+}
+
+.sujet {
+background: #D9D9D9;
+border-style: solid;
+border-width: 0.5vh;
+border-radius: 20px;
+border-color: #D9D9D9;
+transition: border-left-width 0.3s ease; /* Ajout de la transition */
+}
+
+.sujet:hover {
+border-left-width: 1vh;
+}
   
   
 
