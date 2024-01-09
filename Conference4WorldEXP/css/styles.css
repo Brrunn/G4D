@@ -61,7 +61,7 @@ header .navigation a:hover{
     padding: 30px 7vw;
 }
 
-.content .info h2{
+.content .infotitre{
     color: white;
     font-size: 55px;
     text-transform: capitalize;
@@ -71,7 +71,7 @@ header .navigation a:hover{
     margin-bottom: 30px;
 }
 
-.content .info p{
+.content .infotexte{
     color: white;
     font-size: 20px;
     font-weight: 500;
