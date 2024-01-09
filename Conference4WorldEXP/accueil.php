@@ -12,12 +12,19 @@
     <section class="hero">
         <input type="checkbox" id="check">
         <header>
-            <a href="accueil.html"><img src="images/LogoC4Wsfond.png" class="logo"></a>
+            <a href="accueil.php"><img src="images/LogoC4Wsfond.png" class="logo"></a>
             <div class="navigation">
-                <a class="navactif" href="#">Accueil</a>
-                <a href="conferences.html">Conférences</a>
-                <a href="forum.html">FAQ/Forum</a>
-                <a href="connexion.html">Se connecter</a>
+                <a class="navactif" href="accueil.php">Accueil</a>
+                <a href="conferences.php">Conférences</a>
+                <a href="forum.php">FAQ/Forum</a>
+                <?php
+                session_start();
+                if (isset($_SESSION['Nom'])) {
+                    echo '<a href="profil.php"><i class="fa-regular fa-user"></i> ' . $_SESSION['Nom'] . '</a>';
+                } else {
+                    echo '<a href="connexion.html" class="connexion-header"><i class="fa-regular fa-user"></i>Connexion</a>';
+                }
+                ?>
             </div>
             <label for="check">
                 <i class="fas fa-bars menu-btn"></i>
@@ -46,13 +53,13 @@
     <script src="script.js"></script>
     
    <footer class="footer">
-        <a href="acceuil.html"><img src="images/LogoC4Wsfond.png" alt="logo"></a>
+        <a href="accueil.php"><img src="images/LogoC4Wsfond.png" alt="logo"></a>
     
         <div>
             <p class="titresection">Protection des données</p>
-            <a href="Politique_confidentialité.html">Politique de confidentialité</a>
+            <a href="mentions_legales.php">Mentions Légales</a>
             <br> 
-            <a href="conditions_utilisation.html">Conditions d'utilisation</a>
+            <a href="conditions_utilisation.php">Conditions Générales d'Utilisation</a>
         </div>
         <div>
             <p class="titresection">Nous contacter</p>
@@ -61,11 +68,11 @@
         </div>
         <div>
             <p class="titresection">Navigation</p>
-            <a href="acceuil.html">Accueil</a>
+            <a href="acceuil.php">Accueil</a>
             <br> 
             <a href="connexion.html">Connexion</a>
             <br> 
-            <a href="forum.html">Forum</a>
+            <a href="forum.php">Forum</a>
         </div>
         <div class="copyright">
             <p>&copy; 2023 | Conferences4World - Tous droits réservés</p>

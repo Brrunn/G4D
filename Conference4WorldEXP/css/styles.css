@@ -55,6 +55,21 @@ header .navigation a:not(:last-child){
 header .navigation a:hover{
     color: #FF7004;
 }
+.navigation fa-regular fa-user{
+    color: black;
+    font-size: 24px;
+}
+.navigation fa-regular fa-user:hover{
+    color :#FF7004;
+}
+
+.navigation .connexion-header{
+    padding: 8px 22px 8px 22px;
+    border: 1.5px solid black;
+}
+.navigation .connexion-header:hover{
+    border: 1.5px solid #FF7004;
+}
 
 .content {
     max-width: 800px;
@@ -178,7 +193,7 @@ label {
     grid-column-gap: 10vw; /* Espacement entre les colonnes */
     max-width: 100%; /* Largeur maximale pour le contenu */
     margin: 0 auto; /* Centrage horizontal */
-    background: #D9D9D9; /* Couleur de fond pour la grille */
+    background: #d9d9d9; /* Couleur de fond pour la grille */
     padding: 30px 7vw;
 }
 
@@ -186,7 +201,6 @@ label {
     max-width: 100%;
     height: auto;
     width: 700px;
-
 }
 
 .text {
@@ -242,7 +256,7 @@ label {
 }
 
 
-/*Page FORUM*/
+/*Page FAQ*/
 
 .FAQwrapper {
     max-width: 75%;
@@ -308,14 +322,73 @@ label {
     border: none;
 }
 
-.footer {
-    border-top: 1px solid black;
-    padding: 30px;
+/*Page FAQ côté admin*/
+
+/* Styles pour le formulaire d'ajout de question */
+#addQuestionBtn {
+    background-color: #FF7004;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-bottom: 20px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+#addQuestionBtn:hover {
+    background-color: white;
+    color: #FF7004;
+}
+
+#addQuestionForm {
     display: flex;
-    justify-content: space-around;
-    background-color: #D9D9D9;
-    flex-wrap: wrap;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#addQuestionForm input[type="text"],
+#addQuestionForm textarea {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+}
+
+#addQuestionForm button[type="submit"] {
+    background-color: #FF7004;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+#addQuestionForm button[type="submit"]:hover {
+    background-color: white;
+    color: #FF7004;
+}
+
+/*Footer*/
+
+.footer {
     position: relative;
+    height: auto; /* Ajustement pour la hauteur automatique */
+    padding: 30px 7vw;
+    display: flex;
+    flex-wrap: wrap; /* Permettre le passage à la ligne sur les petits écrans */
+    justify-content: space-between;
+    align-items: center;
+    background: #D9D9D9;
+}
+  
+.footer .logo {
+    max-width: 100%; /* Adapter la largeur du logo à la largeur du conteneur */
+    height: auto; /* Ajustement pour la hauteur automatique */
+    margin-bottom: 20px; /* Espace sous le logo */
 }
 
 .footer img {
@@ -329,10 +402,22 @@ label {
     transform: scale(1.1);
 }
 
-.titresection {
-    font-size: 18px;
-    font-weight: bold;
-    margin-bottom: 20px;
+  
+.footer > div {
+    flex: 1; /* Distribuer l'espace équitablement entre les divs */
+    text-align: center; /* Centrer le contenu des divs */
+    margin: 0 10px; /* Marge entre les éléments */
+}
+  
+.footer .titresection {
+    font-size: 18px; /* Ajustement de la taille de la section */
+    margin-bottom: 10px; /* Espace en bas de chaque section */
+}
+  
+.footer .copyright {
+    flex-basis: 100%; /* Prendre toute la largeur disponible */
+    text-align: center;
+    margin-top: 20px; /* Espace au-dessus du copyright */
 }
 
 .footer a {
@@ -360,110 +445,236 @@ label {
         margin-bottom: 0px;
     }
 }
-
-.footer .copyright {
-    position: absolute;
-    bottom: 0px;
-    left: 0;
-    width: 100%;
-    text-align: center;
-}
-
-/* Page des conférences */
-
-footer{
-    position: relative;
-top: 0;
-height: 30vh;
-width: 100%;
-padding: 30px 7vw;
-display: flex;
-justify-content: space-between;
-align-items: center;
-background: #D9D9D9;
-}
-
-footer .logo{
-position: relative;
-width: 24vh;  /*Modifier taille logo*/
-}
-
-footer #Copyright{
-position: absolute;
-right: 162vh;
-top: 21vh;
-}
-
-footer .titresection{
-font-size: 22px;
-}
-
-div .link{
-color: black;
-font-size: 22px ;
+.titresection {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 20px;
 }
 
 .titre {
-text-align: center;
-color: black;
+    text-align: center;
+    color: black;
 }
 
-.logosujet {
-height: 200px; /* Définissez la hauteur souhaitée pour les logos */
-width: 250px; /* Ajuste automatiquement la largeur en fonction du ratio d'aspect original */
-padding: 25px; /* Ajout du padding */
-}
+/*Page Conférences*/
 
-#Maths{
-position: absolute;
-top: 28vh;
-left: 35vh;
-}
-
-#Physique{
-position: absolute;
-top: 28vh;
-left: 85vh;
-}
-
-#Info{
-position: absolute;
-top: 28vh;
-left: 135vh ;
-}
-
-#Philo{
-position: absolute;
-top: 61vh;
-left: 35vh;
-}
-
-#Eco{
-position: absolute;
-top: 61vh;
-left: 85vh;
-}
-
-#Divers{
-position: absolute;
-top: 61vh;
-left: 135vh;
+.sujets-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 20px;
+    justify-content: center;
+    margin-top: 30px;
+    margin-left: 8vw;
+    margin-right: 8vw;
 }
 
 .sujet {
-background: #D9D9D9;
-border-style: solid;
-border-width: 0.5vh;
-border-radius: 20px;
-border-color: #D9D9D9;
-transition: border-left-width 0.3s ease; /* Ajout de la transition */
+    background: #D9D9D9;
+    border-style: solid;
+    border-width: 0.5vh;
+    border-radius: 20px;
+    border-color: #D9D9D9;
+    transition: border-left-width 0.3s ease;
+    width: 100%; /* Trois éléments par ligne pour les écrans larges */
+    max-width: 300px;
+    text-align: center;
+    padding: 10px;
+    box-sizing: border-box;
+    transition: transform 0.3s;
 }
 
 .sujet:hover {
-border-left-width: 1vh;
+    transform: scale(1.06);
+}
+
+.logosujet {
+    max-height: 250px; /* Ajuste la hauteur maximale des images */
+    max-width: 250px; /* Ajuste la largeur maximale des images */
+    padding: 30px 70px 20px 70px; /* Ajoute du padding autour des logos */
+    object-fit: contain; /* Remplissage du conteneur en conservant le ratio */
+}
+
+.sujets-container .sujet .titre {
+    text-decoration: none;
+    color: black; /* Ajout de la couleur du texte pour les liens */
+}
+
+.titre {
+    font-size: 1.1rem; /* Taille de police agrandie pour les titres */
+}
+
+
+
+
+/*Partie ajout de sujets*/
+
+.ajout-sujet:hover{
+    transform: none;
+}
+
+.input-sujet {
+    margin: 10px 0;
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    width: calc(100% - 20px);
+}
+
+.ajouter-btn {
+    background-color: #FF7004;
+    color: white;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.ajouter-btn:hover {
+    background-color: #FF9500;
+}
+
+.ajouter-btn {
+    margin-top: 10px;
+    color: white;
+    background: #FF7004;
+    text-decoration: none;
+    letter-spacing: 1px;
+    padding: 15px 45px 15px 45px;
+    border-radius: 50px;
+    transition: transform 0.3s, background-color 0.3s, color 0.3s;
+}
+
+.ajouter-btn:hover {
+    color: #FF7004;
+    background: white;
+}
+
+/*Page détails de conférences*/
+
+.container-conferences{
+    width: auto;
+    background: #d9d9d9;
+    border: 2px solid rgba(255, 255, 255, .2);
+    backdrop-filter: blur(20px);
+    color: black;
+    border-radius: 5px;
+    padding: 30px 40px;
+    margin-top: 50px; 
+    margin-bottom: 50px; 
+    margin-left: 8vw;
+    margin-right: 8vw;
+    text-align: center;
+}
+
+.conference{
+    background-color: white;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    border-radius: 20px;
+    padding: 20px;
+}
+
+.titre-conference {
+    font-size: 32px;
+    padding-top: 20px;
+    padding-bottom: 20px;
 }
   
-  
+/*Page conditions d'utilisation*/
 
+.CGU-container {
+    width: auto;
+    display: flex;
+    flex-direction: column; 
+    justify-content: center; 
+    align-items: center; 
+    text-align: left;
+    margin-left: 8vw;
+    margin-right: 8vw;
+    padding-top: 30px;
+    padding-bottom: 60px;
+}
 
+.CGU-form {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
 
+.CGU-form h2{
+    margin-bottom: 10px;
+}
+
+.CGU-form .CGU-text {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    height: 25vh;
+}
+.CGU-form .CGU-titre {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+}
+
+.CGU-form button[type="submit"] {
+    background-color: #FF7004;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.CGU-form button[type="submit"]:hover {
+    background-color: white;
+    color: #FF7004;
+}
+
+.delete-form {
+    display: inline; /* ou inline-block selon l'effet souhaité */
+    margin: 0;
+    padding: 0;
+    border: none;
+    background: none;
+}
+
+.delete-btn {
+    padding: 0;
+    margin: 0;
+    border: none;
+    background: none;
+    cursor: pointer; /* ajoute une icône de curseur au survol */
+}
+
+.delete-btn:hover{
+    color: #FF7004;
+}
+
+.section-ajout-conf{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width: auto;
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+}
+
+.addconfbtn{
+    text-decoration: none;
+    color: black;
+    background-color: #D9D9D9;
+    padding: 15px 25px 15px 25px;
+    border-radius: 30px;
+    transition: transform 0.3s;
+}
+
+.addconfbtn:hover{
+    transform: scale(1.06);
+}

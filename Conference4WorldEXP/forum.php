@@ -1,3 +1,34 @@
+<?php
+    session_start();
+
+    // Connexion à la base de données (à compléter avec vos informations de connexion)
+    $conn = new mysqli("localhost", "root", "root", "G4D");
+
+    if ($conn->connect_error) {
+        die("La connexion a échoué : " . $conn->connect_error);
+    }
+
+    // Traitement du formulaire pour ajouter une nouvelle question et réponse
+    if (isset($_POST['newQuestion']) && isset($_POST['newAnswer'])) {
+        // Assurez-vous de nettoyer les données d'entrée pour éviter les injections SQL
+        $newQuestion = $conn->real_escape_string($_POST['newQuestion']);
+        $newAnswer = $conn->real_escape_string($_POST['newAnswer']);
+
+        // Requête d'insertion dans la base de données
+        $insertQuery = "INSERT INTO `question de FAQ` (`réponse proposée`, `question proposée`) VALUES ('$newAnswer', '$newQuestion')";
+        if ($conn->query($insertQuery) === TRUE) {
+            // Redirection vers la page de la FAQ après l'ajout réussi
+            header("Location: forum.php");
+            exit();
+        } else {
+            echo "Erreur lors de l'ajout de la question : " . $conn->error;
+        }
+    }
+
+    // Récupération des questions et réponses depuis la base de données
+    $sql_select = "SELECT `question proposée`, `réponse proposée` FROM `question de FAQ`";
+    $result_select = $conn->query($sql_select);
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -6,18 +37,26 @@
     <link rel="icon" href="./images/Favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    
     <title>Conference 4 World</title>
 </head>
 <body>
     <section class="hero">
         <input type="checkbox" id="check">
         <header>
-            <a href="accueil.html"><img src="images/LogoC4Wsfond.png" class="logo"></a>
+            <a href="accueil.php"><img src="images/LogoC4Wsfond.png" class="logo"></a>
             <div class="navigation">
-                <a href="accueil.html">Accueil</a>
-                <a href="conferences.html">Conférences</a>
-                <a class="navactif" href="forum.html">FAQ/Forum</a>
-                <a href="connexion.html">Se connecter</a>
+                <a href="accueil.php">Accueil</a>
+                <a href="conferences.php">Conférences</a>
+                <a class="navactif" href="forum.php">FAQ/Forum</a>
+                <?php
+                session_start();
+                if (isset($_SESSION['Nom'])) {
+                    echo '<a href="profil.php"><i class="fa-regular fa-user"></i> ' . $_SESSION['Nom'] . '</a>';
+                } else {
+                    echo '<a href="connexion.html" class="connexion-header"><i class="fa-regular fa-user"></i>Connexion</a>';
+                }
+                ?>
             </div>
             <label for="check">
                 <i class="fas fa-bars menu-btn"></i>
@@ -61,17 +100,62 @@
                     </p>
                 </div>
             </div>
-        </div>
+            <?php
+                // Récupération des questions et réponses depuis la base de données
+                $sql_select = "SELECT `question proposée`, `réponse proposée` FROM `question de FAQ`";
+                $result_select = $conn->query($sql_select);
+
+                if ($result_select->num_rows > 0) {
+                    while ($row_select = $result_select->fetch_assoc()) {
+                    // Structure HTML pour afficher chaque question et réponse
+            ?>
+            <div class="faq">
+                <button class="question">
+                    <?php echo $row_select['question proposée']; ?>
+                    <i class="fa-solid fa-chevron-down"></i>
+                </button>
+                <div class="reponse">
+                    <p>
+                        <?php echo $row_select['réponse proposée']; ?>
+                    </p>
+                </div>
+            </div>
+            <?php
+                }
+            }
+            ?>
+            <?php
+            // Vérifier si l'utilisateur est administrateur pour afficher le formulaire d'ajout de questions/réponses
+            if (isset($_SESSION['id utilisateur'])) {
+                $user_id = $_SESSION['id utilisateur'];
+                $sql = "SELECT type FROM utilisateur WHERE `id utilisateur` = $user_id";
+                $result = $conn->query($sql);
+
+                if ($result->num_rows > 0) {
+                    $row = $result->fetch_assoc();
+                    if ($row["type"] === "admin") {
+            ?>
+                <form id="addQuestionForm" method="post">
+                <input type="text" name="newQuestion" id="newQuestion" placeholder="Nouvelle question" required>
+                <textarea name="newAnswer" id="newAnswer" placeholder="Réponse" required></textarea>
+                <button type="submit">Ajouter</button>
+                </form>
+                <?php
+                    }
+                }
+            }
+        ?>
+         </div>
     </section>
     <script src="script.js"></script>
     <footer class="footer">
-        <a href="acceuil.html"><img src="images/LogoC4Wsfond.png" alt="logo"></a>
+        <a href="accueil.php"><img src="images/LogoC4Wsfond.png" alt="logo"></a>
     
         <div>
             <p class="titresection">Protection des données</p>
-            <a href="Politique_confidentialité.html">Politique de confidentialité</a>
+            <a href="mentions_legales.php">Mentions légales</a>
             <br> 
-            <a href="conditions_utilisation.html">Conditions d'utilisation</a>
+            <a href="conditions_utilisation.php">Conditions Générales d'Utilisation</a>
         </div>
         <div>
             <p class="titresection">Nous contacter</p>
@@ -80,11 +164,11 @@
         </div>
         <div>
             <p class="titresection">Navigation</p>
-            <a href="acceuil.html">Accueil</a>
+            <a href="acceuil.php">Accueil</a>
             <br> 
             <a href="connexion.html">Connexion</a>
             <br> 
-            <a href="forum.html">Forum</a>
+            <a href="forum.php">Forum</a>
         </div>
         <div class="copyright">
             <p>&copy; 2023 | Conferences4World - Tous droits réservés</p>
