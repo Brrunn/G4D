@@ -184,7 +184,7 @@ label {
     
 }
 
-/*Section démo avec la photo faite par l'IA lol*/
+/*Section démo avec l'image à gauche */
 
 
 .content-demo {
@@ -193,7 +193,7 @@ label {
     grid-column-gap: 10vw; /* Espacement entre les colonnes */
     max-width: 100%; /* Largeur maximale pour le contenu */
     margin: 0 auto; /* Centrage horizontal */
-    background: #d9d9d9; /* Couleur de fond pour la grille */
+    background: #d9d9d9; /* Couleur de fond pour la partie présentation image */
     padding: 30px 7vw;
 }
 
