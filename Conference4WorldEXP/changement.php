@@ -2,7 +2,8 @@
 session_start();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $email = $_POST["e-mail"];
+    // Récupérer l'id de l'utilisateur de la session
+    $id_utilisateur = $_SESSION["id utilisateur"];
     $ancienMotDePasse = $_POST["AncienMotDePasse"];
     $nouveauMotDePasse = $_POST["NouveauMotDePasse"];
     $confirmNouveauMotDePasse = $_POST["ConfirmerNouveauMotDePasse"];
@@ -18,8 +19,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $connexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
         // Vérifier si l'ancien mot de passe est correct pour cet utilisateur
-        $requete = $connexion->prepare("SELECT * FROM `utilisateur` WHERE `adresse mail` = :email AND `mot de passe` = :password");
-        $requete->bindParam(':email', $email);
+        $requete = $connexion->prepare("SELECT * FROM `utilisateur` WHERE `id utilisateur` = :id_utilisateur AND `mot de passe` = :password");
+        $requete->bindParam(':id_utilisateur', $id_utilisateur);
         $requete->bindParam(':password', $ancienMotDePasse);
         $requete->execute();
 
@@ -27,9 +28,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         if ($resultat) {
             // Mettre à jour le mot de passe
-            $updateMotDePasse = $connexion->prepare("UPDATE `utilisateur` SET `mot de passe` = :nouveauMotDePasse WHERE `adresse mail` = :email");
+            $updateMotDePasse = $connexion->prepare("UPDATE `utilisateur` SET `mot de passe` = :nouveauMotDePasse WHERE `id utilisateur` = :id_utilisateur");
             $updateMotDePasse->bindParam(':nouveauMotDePasse', $nouveauMotDePasse);
-            $updateMotDePasse->bindParam(':email', $email);
+            $updateMotDePasse->bindParam(':id_utilisateur', $id_utilisateur);
             $updateMotDePasse->execute();
         
             // Afficher une notification et rediriger vers la page d'accueil
