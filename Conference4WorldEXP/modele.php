@@ -6,6 +6,7 @@
     <link rel="icon" href="./images/Favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel="stylesheet">
     <title>Conference 4 World</title>
 </head>
 <body>
@@ -59,6 +60,16 @@
                 echo '<h1 class="titre-conference">Conférences en ' . $sujet . '</h1>';
             // Affichage des détails pour chaque conférence
                 while ($row = $result->fetch_assoc()) {
+                    echo "<form method='POST' action='barre.php'>
+                    <div class='barre-recherche'>
+                      <input type='text' name='mot-cle' placeholder='Tapez votre mot clé'>
+                      <div class='loupe'>
+                      <i class='bx bx-search-alt-2'></i>
+                      <img src='images/loupe.png' alt='loupe'>
+                      </div>
+                      <button onclick='search()'>Rechercher</button>
+                      
+                    </div>"
                     echo '<div class="conference">';
                     echo '<h2 class="conference-nom">Titre : ' . $row["titre"] . '</h2>';
                     echo '<p class="conference-horaire">De : ' . $row["heure de début"] . '</p>';
