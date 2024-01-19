@@ -17,6 +17,8 @@
     background: url(../images/BGIMAGE.png) no-repeat;
     background-size: cover;
     background-position: center;
+    background-attachment: fixed;
+    z-index: 0;
 }
 
 header {
@@ -72,8 +74,10 @@ header .navigation a:hover{
 }
 
 .content {
+    position: relative;
     max-width: 800px;
     padding: 30px 7vw;
+    z-index: -1;
 }
 
 .content .info h2{
@@ -116,6 +120,16 @@ label {
 #check {
     z-index: 3;
     display: none;
+}
+
+/*Animation parallax*/
+
+.parallax-text {
+    transform: translateY(0); /* Réinitialisez la translation */
+}
+
+.hero.active .parallax-text {
+    transform: translateY(calc(0.5 * var(--scroll))); /* Réduisez le coefficient à 0.2 */
 }
 
 /* Styles pour l'animation slide up */
@@ -186,15 +200,14 @@ label {
 
 /*Section démo avec l'image à gauche */
 
-
 .content-demo {
-    display: grid;
-    grid-template-columns: minmax(auto, 500px) 1fr; /* Première colonne avec une largeur maximale de 500px */
-    grid-column-gap: 10vw; /* Espacement entre les colonnes */
+    position: relative;
+    display: flex;
     max-width: 100%; /* Largeur maximale pour le contenu */
     margin: 0 auto; /* Centrage horizontal */
-    background: #d9d9d9; /* Couleur de fond pour la partie présentation image */
+    background: #D9D9D9; /* Couleur de fond pour la partie présentation image */
     padding: 30px 7vw;
+    z-index: 1;
 }
 
 .imagedemo {
@@ -204,6 +217,7 @@ label {
 }
 
 .text {
+    padding: 20px 20px 20px 20px;
     max-width: auto;
     display: flex;
     font-weight: 500;
@@ -228,8 +242,10 @@ label {
 /*Mise en place du responsive design*/
 @media (max-width: 940px) {
     .content-demo {
+        display: grid;
         grid-template-columns: 1fr; /* Une seule colonne pour la version mobile */
-
+        padding-left: 20px;
+        padding-right: 20px;
     }
 
     .imagedemo {
@@ -255,7 +271,70 @@ label {
     }
 }
 
+/*Section témoignages*/
+.temoignage-partenaires{
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    background: #D9D9D9;
+}
 
+.content-temoin{
+    margin-top: 30px;
+    margin-bottom: 30px;
+    margin-left: 7vw;
+    margin-right: 7vw;
+    display: flex;
+    text-align: center;
+    gap: 20px;
+}
+
+@media (max-width: 940px) {
+    .content-temoin{
+        grid-template-columns: 1fr;
+        grid-row-gap: 30px;
+    }
+}
+
+
+.temoin-img{
+    width: 120px;
+}
+
+.titre-section-temoin{
+    font-size: 38px;
+}
+
+.témoin{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    padding: 20px;
+    row-gap: 20px;
+    max-width: 900px;
+}
+
+.témoin p{
+    font-size: 18px;
+}
+
+.nom-temoin{
+    font-size: 26px;
+    font-weight: 600;
+}
+
+.quote-icon{
+    font-size: 30px;
+    color: #FF7004;
+}
+.job-temoin{
+    font-size: 20px;
+    font-weight: 400;
+    margin-top: -20px;
+}
 /*Page FAQ*/
 
 .FAQwrapper {
@@ -489,8 +568,8 @@ label {
 }
 
 .logosujet {
-    max-height: 250px; /* Ajuste la hauteur maximale des images */
-    max-width: 250px; /* Ajuste la largeur maximale des images */
+    max-height: 250px; /* Ajuste la hauteur maximale des ../images */
+    max-width: 250px; /* Ajuste la largeur maximale des ../images */
     padding: 30px 70px 20px 70px; /* Ajoute du padding autour des logos */
     object-fit: contain; /* Remplissage du conteneur en conservant le ratio */
 }
