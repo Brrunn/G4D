@@ -727,3 +727,34 @@ label {
 }
 
 /* ... Votre code existant ... */
+
+
+/*Pages math....physique.....*/
+.conference {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .button-inscrire {
+    background-color: orange;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+  }
+  
+  .button-inscrit {
+    background-color: green;
+    color: white;
+  }
+
+  .conference-capacite {
+    display: none; /* Cela va cacher l'élément */
+  }
