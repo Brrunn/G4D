@@ -57,15 +57,22 @@
             // Vérification du nombre de résultats
             if ($result->num_rows > 0) {
                 echo '<h1 class="titre-conference">Conférences en ' . $sujet . '</h1>';
-            // Affichage des détails pour chaque conférence
+             // Affichage des détails pour chaque conférence
+
+            
+
                 while ($row = $result->fetch_assoc()) {
+
+                     
+    
                     echo '<div class="conference">';
-                    echo '<h2 class="conference-nom">Titre : ' . $row["titre"] . '</h2>';
+                    echo '<h2 class="conference-nom"> ' . $row["titre"] . '</h2>';
                     echo '<p class="conference-horaire">De : ' . $row["heure de début"] . '</p>';
                     echo '<p class="conference-horaire">À : ' . $row["heure de fin"] . '</p>';
                     echo '<p class="conference-date">Le : ' . $row["date"] . '</p>';
                     echo '<p class="conference-capacite">Capacité de la salle : ' . $row["salle_capacité"] . '</p>';
-                    echo '<p class="conference-salle">Conférence en salle: ' . $row["salle_numéro de salle"] . '</p>';
+                    echo '<p class="conference-salle"> salle: ' . $row["salle_numéro de salle"] . '</p>';
+                    echo '<button class="button-inscrire" onclick="inscrire(this)">S\'inscrire</button>';
                     echo '</div>';
                 }
             } else {
@@ -77,6 +84,14 @@
             ?>
 
             </div>
+
+            <script>
+            function inscrire(button) {
+            button.classList.add('button-inscrit');
+            button.textContent = 'Inscrit(e)';
+            }
+            </script> 
+            
             
         </section>
         <footer class="footer">
