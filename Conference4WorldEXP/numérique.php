@@ -23,7 +23,7 @@
                     if (isset($_SESSION['Nom'])) {
                         echo '<a href="profil.php"><i class="fa-regular fa-user"></i> ' . $_SESSION['Nom'] . '</a>';
                     } else {
-                        echo '<a href="connexion.html"><i class="fa-regular fa-user"></i>Connexion</a>';
+                        echo '<a href="connexion.php"><i class="fa-regular fa-user"></i>Connexion</a>';
                     }
                     ?>
                 </div>
@@ -49,7 +49,7 @@
             // Requête pour récupérer les informations des conférences en mathématiques par exemple
             $sql = "SELECT `sujet`,`titre`, `date`, `heure de début`, `heure de fin`, `salle_capacité`, `salle_numéro de salle` FROM conférence WHERE sujet = ?";
 
-            $result = $conn->query($sql);
+           
             $stmt = $conn->prepare($sql);
             $stmt->bind_param("s", $sujet);
             $stmt->execute();
@@ -97,7 +97,7 @@
                 <p class="titresection">Navigation</p>
                 <a href="acceuil.php">Accueil</a>
                 <br> 
-                <a href="connexion.html">Connexion</a>
+                <a href="connexion.php">Connexion</a>
                 <br> 
                 <a href="forum.php">Forum</a>
             </div>

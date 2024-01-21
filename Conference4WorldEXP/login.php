@@ -1,42 +1,50 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 session_start();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $email = $_POST["e-mail"];
-    $password = $_POST["MotDePasse"];
-
-    $serveur = 'localhost'; 
-    $utilisateur_db = 'root'; 
-    $mot_de_passe_db = 'root'; 
-    $nom_base_de_donnees = 'G4D'; 
+    $email = $_POST['e-mail'];
+    $password = $_POST['MotDePasse'];
 
     try {
-        $connexion = new PDO("mysql:host=$serveur;dbname=$nom_base_de_donnees", $utilisateur_db, $mot_de_passe_db);
-        $connexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $servername = "localhost";
+        $username = "root";
+        $password_db = "root";
+        $dbname = "G4D";
 
-        $requete = $connexion->prepare("SELECT * FROM `utilisateur` WHERE `adresse mail` = :email AND `mot de passe` = :password");
-        $requete->bindParam(':email', $email);
-        $requete->bindParam(':password', $password);
-        $requete->execute();
+        $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password_db);
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-        $resultat = $requete->fetch(PDO::FETCH_ASSOC);
+        $stmt = $conn->prepare("SELECT `id utilisateur`, `Nom`, `Prénom`, `type`, `mot de passe` FROM `utilisateur` WHERE `adresse mail` = ?");
+        $stmt->execute([$email]);
+        $row = $stmt->fetch();
 
-        if ($resultat) {
-            //On récupère les informations de l'utilisateur pour la suite...
-            $_SESSION['id utilisateur'] = $resultat['id utilisateur'];
-            $_SESSION['Nom'] = $resultat['Nom'];
-            $_SESSION['Prénom'] = $resultat['Prénom'];
-            $_SESSION['type'] = $resultat['type'];
+        if ($row && password_verify($password, $row['mot de passe'])) {
+            // Stocker les informations de session
+            $_SESSION['id utilisateur'] = $row['id utilisateur'];
+            $_SESSION['Nom'] = $row['Nom'];
+            $_SESSION['Prénom'] = $row['Prénom'];
+            $_SESSION['type'] = $row['type'];
+
+            echo "Connexion réussie!";
+           
+            // Rediriger vers la page d'accueil après la connexion réussie
             header("Location: accueil.php");
-            exit();
+            exit(); // Assurez-vous de terminer l'exécution après la redirection
         } else {
-            echo "Adresse e-mail ou mot de passe incorrect.";
+            
+            header("Location: connexion.php?error=invalid_credentials");
+            
+            
+            exit();
         }
-    } catch (PDOException $e) {
-        echo "Erreur : " . $e->getMessage();
+
+    } catch(PDOException $e) {
+        echo "Erreur: " . $e->getMessage();
     }
+
+    $conn = null;
 }
 ?>
-
-
-

@@ -6,27 +6,17 @@ if ($conn->connect_error) {
     die("La connexion a échoué : " . $conn->connect_error);
 }
 
-if (isset($_POST['delete_submit']) && isset($_POST['delete_id'])) {
-    $delete_id = $conn->real_escape_string($_POST['delete_id']);
+// Vérifier la langue choisie (par exemple, à partir de paramètres de l'URL ou d'une session)
+$lang = isset($_GET['lang']) ? $_GET['lang'] : (isset($_SESSION['lang']) ? $_SESSION['lang'] : 'fr');
 
-    $deleteQuery = "DELETE FROM `CGU et mentions légales` WHERE `id CGU et mentions légales` = '$delete_id'";
+// Charger le fichier de traduction approprié
+$translations = include("lang/$lang.php");
 
-    if ($conn->query($deleteQuery) === TRUE) {
-        header("Location: conditions_utilisation.php?success=1");
-        exit();
-    } else {
-        echo "Erreur lors de la suppression : " . $conn->error;
-    }
-}
-if (isset($_GET['success']) && $_GET['success'] == '1') {
-    echo "<script>alert('Ligne supprimée avec succès.');</script>";
-}
-
-$sql_cgu = "SELECT titre, contenu, `id CGU et mentions légales` FROM `CGU et mentions légales` WHERE type = 'CGU'";
+$sql_cgu = "SELECT titre, contenu, titre_en, contenu_en, `id_CGU_mentions_legales` FROM `cgu_mentions_legales` WHERE type = 'CGU'";
 $result_cgu = $conn->query($sql_cgu);
 ?>
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="<?php echo $lang; ?>">
 <head>
     <link rel="stylesheet" href="./css/styles.css">
     <link rel="icon" href="./images/Favicon.ico" type="image/x-icon">
@@ -60,14 +50,14 @@ $result_cgu = $conn->query($sql_cgu);
     <header>
         <a href="accueil.php"><img src="images/LogoC4Wsfond.png" class="logo"></a>
         <div class="navigation">
-            <a  href="accueil.php">Accueil</a>
-            <a href="conferences.php">Conférences</a>
-            <a href="forum.php">FAQ/Forum</a>
+            <a  href="accueil.php"><?php echo $translations['accueil_home']; ?></a>
+            <a href="conferences.php" class="navactif"><?php echo $translations['conferences_conferences']; ?></a>
+            <a href="forum.php"><?php echo $translations['accueil_forum']; ?></a>
             <?php
             if (isset($_SESSION['Nom'])) {
                 echo '<a href="profil.php"><i class="fa-regular fa-user"></i> ' . $_SESSION['Nom'] . '</a>';
             } else {
-                echo '<a href="connexion.html"><i class="fa-regular fa-user"></i>Connexion</a>';
+                echo '<a href="connexion.php" class="connexion-header"><i class="fa-regular fa-user"></i>' . $translations['accueil_login'] . '</a>';
             }
             ?>
         </div>
@@ -78,19 +68,24 @@ $result_cgu = $conn->query($sql_cgu);
     </header>
     <main>
         <div class="CGU-container">
-            <h1>Conditions Générales d'Utilisation (CGU)</h1>
-            <p>Merci de lire attentivement les Conditions Générales d'Utilisation suivantes avant d'utiliser notre service :</p>
+        <h1><?php echo $translations['terms_of_use_header']; ?></h1>
+
+            <p><?php echo $translations['welcome_message']; ?></p>
 
             <?php
             if ($result_cgu->num_rows > 0) {
                 while ($row_cgu = $result_cgu->fetch_assoc()) {
-                    echo "<h2>" . $row_cgu['titre'] . "</h2>";
-                    echo "<p>" . $row_cgu['contenu'] . "</p>";
+                    // Utiliser la variable $lang pour déterminer la langue appropriée
+                    $titre = ($lang == 'en') ? $row_cgu['titre_en'] : $row_cgu['titre'];
+                    $contenu = ($lang == 'en') ? $row_cgu['contenu_en'] : $row_cgu['contenu'];
+
+                    echo "<h2>" . $titre . "</h2>";
+                    echo "<p>" . $contenu . "</p>";
                     //Formulaire de suppression
                     if (isset($_SESSION['id utilisateur']) && $_SESSION['type'] === "admin") {
                         echo "
                             <form method='post' class='delete-form'>
-                                <input type='hidden' name='delete_id' value='" . $row_cgu['id CGU et mentions légales'] . "'>
+                                <input type='hidden' name='delete_id' value='" . $row_cgu['id_CGU_mentions_legales'] . "'>
                                 <button type='submit' name='delete_submit' class='delete-btn'><i class='fas fa-trash'></i></button>
                             </form>
                         ";
@@ -113,7 +108,7 @@ $result_cgu = $conn->query($sql_cgu);
                             $new_title = $conn->real_escape_string($_POST['new_title']);
                             $new_content = $conn->real_escape_string($_POST['new_content']);
 
-                            $insertQuery = "INSERT INTO `CGU et mentions légales` (titre, contenu, type) VALUES ('$new_title', '$new_content', 'CGU')";
+                            $insertQuery = "INSERT INTO `CGU_mentions_legales` (titre, contenu, type) VALUES ('$new_title', '$new_content', 'CGU')";
                             if ($conn->query($insertQuery) === TRUE) {
                                 header("Location: conditions_utilisation.php");
                                 exit();
@@ -130,42 +125,41 @@ $result_cgu = $conn->query($sql_cgu);
                                 <button type='submit' name='submit'>Ajouter</button>
                             </form>
                         ";
+                    }
                     } else {
-                        echo "Vous n'avez pas les autorisations pour accéder à cette page.";
+                        echo $translations['utilisateur_non_trouve'];
                     }
                 } else {
-                    echo "Utilisateur non trouvé.";
+                    echo $translations['conditions_mises_a_jour'];
                 }
-            } else {
-                echo "Ces conditions d'utilisation ont été mises à jour par un administrateur.";
-            }
-            ?>
+                ?>
         </div>
     </main>
     <footer class="footer">
         <a href="accueil.php"><img src="images/LogoC4Wsfond.png" alt="logo"></a>
         <div>
-            <p class="titresection">Protection des données</p>
-            <a href="mentions_legales.php">Mentions Légales</a>
+            <p class="titresection"><?php echo $translations['accueil_data_protection']; ?></p>
+            <a href="mentions_legales.php"><?php echo $translations['accueil_legal_mentions']; ?></a>
             <br> 
-            <a href="conditions_utilisation.php">Conditions Générales d'Utilisation</a>
+            <a href="conditions_utilisation.php"><?php echo $translations['accueil_general_conditions']; ?></a>
         </div>
         <div>
-            <p class="titresection">Nous contacter</p>
+            <p class="titresection"><?php echo $translations['accueil_contact_us']; ?></p>
             <p><i class="fas fa-envelope"></i> louiswinkelmuller@icloud.com</p>
-            <p><i class="fas fa-phone"></i> 0674870757</p>
+            <p><i class="fas fa-phone"></i> 067487077</p>
         </div>
         <div>
-            <p class="titresection">Navigation</p>
-            <a href="accueil.php">Accueil</a>
+            <p class="titresection"><?php echo $translations['accueil_navigation']; ?></p>
+            <a href="accueil.php"><?php echo $translations['accueil_home']; ?></a>
             <br> 
-            <a href="connexion.html">Connexion</a>
+            <a href="connexion.php"><?php echo $translations['accueil_login']; ?></a>
             <br> 
-            <a href="forum.php">Forum</a>
+            <a href="forum.php"><?php echo $translations['accueil_forum']; ?></a>
         </div>
         <div class="copyright">
-            <p>&copy; 2023 | Conferences4World - Tous droits réservés</p>
+            <p>&copy; 2023 | Conferences4World - <?php echo $translations['accueil_all_rights_reserved']; ?></p>
         </div>
     </footer>
+    
 </body>
 </html>

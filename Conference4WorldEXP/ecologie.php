@@ -23,7 +23,7 @@
                     if (isset($_SESSION['Nom'])) {
                         echo '<a href="profil.php"><i class="fa-regular fa-user"></i> ' . $_SESSION['Nom'] . '</a>';
                     } else {
-                        echo '<a href="connexion.html"><i class="fa-regular fa-user"></i>Connexion</a>';
+                        echo '<a href="connexion.php"><i class="fa-regular fa-user"></i>Connexion</a>';
                     }
                     ?>
                 </div>
@@ -90,7 +90,7 @@
                 <p class="titresection">Navigation</p>
                 <a href="acceuil.php">Accueil</a>
                 <br> 
-                <a href="connexion.html">Connexion</a>
+                <a href="connexion.php">Connexion</a>
                 <br> 
                 <a href="forum.php">Forum</a>
             </div>

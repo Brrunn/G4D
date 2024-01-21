@@ -11,19 +11,20 @@
 <body>
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-        const form = document.querySelector('form');
-        form.addEventListener('submit', function(event) {
-            const newPassword = document.querySelector('input[name="NouveauMotDePasse"]').value;
-            const confirmNewPassword = document.querySelector('input[name="ConfirmerNouveauMotDePasse"]').value;
+            const form = document.querySelector('form');
+            form.addEventListener('submit', function(event) {
+                const newPassword = document.querySelector('input[name="NouveauMotDePasse"]').value;
+                const confirmNewPassword = document.querySelector('input[name="ConfirmerNouveauMotDePasse"]').value;
 
-            if (newPassword !== confirmNewPassword) {
-                alert("Les nouveaux mots de passe ne correspondent pas");
-                event.preventDefault(); // Empêcher la soumission du formulaire
-            }
+                if (newPassword !== confirmNewPassword) {
+                    alert("Les nouveaux mots de passe ne correspondent pas");
+                    event.preventDefault(); // Empêcher la soumission du formulaire
+                }
+            });
         });
-    });
     </script>
     <div class="wrapper">
+        <a href="profil.php" class="back-link"><i class="fa-solid fa-arrow-left" style="color:#000000; font-size: 24px;"></i></a>
         <form method="POST" action="changement.php">
             <h1>Modifier le mot de passe</h1>
             <div class="input-box">
@@ -41,3 +42,5 @@
             <button name='modification' type="submit" class="btnco">Modifier</button>
         </form>
     </div>
+</body>
+</html>

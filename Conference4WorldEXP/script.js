@@ -1,4 +1,5 @@
 window.addEventListener('DOMContentLoaded', (event) => {
+    // Animation slide-up
     const slideUpElements = document.querySelectorAll('.slide-up');
 
     const slideUpObserver = new IntersectionObserver((entries, observer) => {
@@ -13,72 +14,33 @@ window.addEventListener('DOMContentLoaded', (event) => {
     slideUpElements.forEach(element => {
         slideUpObserver.observe(element);
     });
-});
 
+    // Script pour le menu mobile
+    const checkbox = document.getElementById('check');
+    const navigation = document.querySelector('.navigation');
 
-// Script pour le forum 
-
-var acc= document.getElementsByClassName("question");
-        var i;
-        for(i=0; i < acc.length; i++){
-            acc[i].addEventListener("click", function(){
-                this.classList.toggle("active");
-                this.parentElement.classList.toggle("active");
-                var reponse = this.nextElementSibling;
-
-                if(reponse.style.display === "block"){
-                    reponse.style.display = "none";
-                }
-                else{
-                    reponse.style.display = "block";
-                }
-            });
+    checkbox.addEventListener('change', function () {
+        if (checkbox.checked) {
+            navigation.style.display = 'flex';
+        } else {
+            navigation.style.display = 'none';
         }
+    });
 
+    // Script pour le forum
+    var acc = document.getElementsByClassName("question");
+    var i;
+    for (i = 0; i < acc.length; i++) {
+        acc[i].addEventListener("click", function () {
+            this.classList.toggle("active");
+            this.parentElement.classList.toggle("active");
+            var reponse = this.nextElementSibling;
 
-// Script pour le forum 
-
-var acc= document.getElementsByClassName("question");
-        var i;
-        for(i=0; i < acc.length; i++){
-            acc[i].addEventListener("click", function(){
-                this.classList.toggle("active");
-                this.parentElement.classList.toggle("active");
-                var reponse = this.nextElementSibling;
-
-                if(reponse.style.display === "block"){
-                    reponse.style.display = "none";
-                }
-                else{
-                    reponse.style.display = "block";
-                }
-            });
-        }
-
-
-// barre recherche 
-  function search() {
-    var userInput = document.getElementById("searchInput").value.trim();
-
-    if (userInput === "") {
-        document.getElementById("resultMessage").innerHTML = "Veuillez écrire votre requête.";
-        return;
-    }
-
-    var xhr = new XMLHttpRequest();
-    xhr.onreadystatechange = function() {
-        if (xhr.readyState == 4 && xhr.status == 200) {
-            var result = xhr.responseText;
-            if (result === "NoResult") {
-                document.getElementById("resultMessage").innerHTML = "Aucun résultat.";
+            if (reponse.style.display === "block") {
+                reponse.style.display = "none";
             } else {
-                document.getElementById("resultMessage").innerHTML = "Résultat : " + result;
+                reponse.style.display = "block";
             }
-        }
-    };
-
-    xhr.open("GET", "search.php?query=" + userInput, true);
-    xhr.send();
-}
-
-        
+        });
+    }
+});
