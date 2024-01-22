@@ -758,3 +758,226 @@ label {
   .conference-capacite {
     display: none; /* Cela va cacher l'élément */
   }
+
+
+
+/*/ Pour le calendrier : /*/
+
+#cal {
+    
+    margin-left: 15%;
+}
+
+#enteteCal{
+    width: 75%;
+    height: 100%;
+    background-color: #D9D9D9;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+}
+
+#calT, .confstitre{
+    text-align: center;
+    font-size: 20px;
+}
+
+#avantETaprès{
+    text-align: center;
+}
+
+#apres{
+    margin-left: 20%;
+}
+
+.calbtn{
+    border: none;
+    background-color: #D9D9D9;
+}
+
+.calbtn:hover{
+    color: #FF7004;
+    font-size: 18px;
+}
+
+#Calboîte{
+    width: 75%;
+    height: 100%;
+    background-color: #D9D9D9;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+
+#jours{
+    width: 100%;
+    height: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.jour{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+}
+
+.semaine{
+    width: 100%;
+    height: 15%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.case{
+    width: 35px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid black;
+    border-radius: 50%;
+    padding: 7px;
+    margin: 25px 49px 25px 49px;
+    transition: 0.1s;
+    font-size: 20px;
+}
+
+.case:hover{
+    background-color: #FF7004;
+}
+
+
+.enteteCm{
+    width: 110%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid black;
+    border-radius: 20px;
+    background-color: #D9D9D9;
+}
+
+.dateCm{
+    text-align: center;
+    font-size: 20px;
+    
+}
+
+
+@media screen and (max-width: 463px) { 
+    .case, .jour {
+        position: relative;
+        margin: 2px 3px 2px 3px;  
+    }
+    #Calboîte, #enteteCal{
+        display: grid;
+    }
+}
+
+
+  @media screen and (min-width: 463px) and (max-width: 565px) { 
+    .case, .jour {
+        position: relative;
+        margin: 3px 4px 3px 4px;  
+    }
+    #Calboîte, #enteteCal{
+        display: grid;
+    }
+}
+
+@media screen and (min-width: 565px) and (max-width: 690px) {
+    .case, .jour {
+        position: relative;
+        margin: 7px 9px 7px 9px;
+    }
+    #Calboîte, #enteteCal{
+        display: grid; 
+    }
+}
+
+@media screen and (min-width: 690px) and (max-width: 790px) { 
+    .case, .jour {
+        position: relative;
+        margin: 10px 15px 10px 15px;
+    }
+    #Calboîte, #enteteCal{
+        display: grid; 
+    }
+}
+
+
+@media screen and (min-width: 790px) and (max-width: 901px) { 
+    .case, .jour {
+        position: relative;
+        margin: 15px 20px 15px 20px;
+    }
+    #Calboîte, #enteteCal{
+        display: grid; 
+    }
+}
+
+@media screen and (min-width: 901px) and (max-width: 1215px) {
+    .case, .jour {
+        position: relative;
+        margin: 18px 25px 18px 25px;
+    }
+    #Calboîte, #enteteCal{
+        display: grid; 
+    }
+}
+
+@media screen and (min-width: 1215px) and (max-width: 1325px) {
+    .case, .jour {
+        position: relative;
+        margin: 20px 35px 20px 35px;
+    }
+    #Calboîte, #enteteCal{
+        display: grid; 
+    }
+}
+
+@media screen and (min-width: 1325px) and (max-width: 1460px) {
+    .case, .jour {
+        position: relative;
+        margin: 20px 40px 20px 40px;
+    }
+    #Calboîte, #enteteCal{
+        display: grid; 
+    }
+}
+
+
+        #overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+            z-index: 2;
+        }
+
+        #modal {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+
+
+
