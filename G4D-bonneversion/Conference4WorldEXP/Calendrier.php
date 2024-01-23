@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="./images/Favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <title>Calendrier - Conference 4 World</title>
@@ -26,9 +27,11 @@
             <i class="fas fa-times close-btn"></i>
         </label>
     </header>
-    <div class="content">
-    <h2 class="infotitre">Calendrier</h2>
-	<p class="infotexte">Retrouvez ci-dessous toutes les conférences améliorées par Conferences4World.</p>
+   <div class="content">
+    <div class="info">
+		<h2>Calendrier</h2>
+		<p>Retrouvez ci-dessous toutes les conférences améliorées par Conferences4World.</p>
+	</div>
     </div>
     <br>
     <section id="cal">
